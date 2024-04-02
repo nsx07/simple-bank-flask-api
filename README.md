@@ -8,10 +8,19 @@ This Flask API was developed as part of a homework assignment for [PUCPR (Pontif
 
 ## How to run
 
-> `$ py -3 -m venv .venv` \
-> `$ .venv\Scripts\activate`\
-> `$ pip install Flask` \
+Execute these commands on root of repository, the last one will startup API
+
+> `$ py -3 -m venv .venv` 
+    >> Setup .venv on project
+
+> `$ .venv\Scripts\activate`
+    >> Activate venv 
+
+> `$ pip install Flask`
+    >> Install Flask dependencies
+
 > `$ flask --app api run` 
+    >> Run api.py
 
 
 ## Endpoints
