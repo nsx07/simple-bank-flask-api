@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 bank = {}
 
-@app.route('/<str:account_id>', methods=['GET'])
+@app.route('/<account_id>', methods=['GET'])
 def get_balance(account_id: str):
 
     if account_id in bank:
@@ -12,29 +12,27 @@ def get_balance(account_id: str):
 
     return 'Account not found', 404
 
-@app.route('/<str:account_id>/<int:deposit_value>', methods=['PUT'])
+@app.route('/<account_id>/<float:deposit_value>', methods=['PUT'])
 def deposit(account_id: str, deposit_value: str):
-
     if account_id in bank:
-        bank[account_id] += int(deposit_value)
+        bank[account_id] += deposit_value
         return {"balance": bank[account_id]}, 200
 
     return 'Account not found', 404
 
-@app.route('/<str:account_id>/<int:withdraw_value>', methods=['PATCH'])
-def withdraw(account_id: str, withdraw_value: str):
-
+@app.route('/<account_id>/<float:withdraw_value>', methods=['PATCH'])
+def withdraw(account_id: str, withdraw_value: float):
     if account_id in bank:
 
-        if bank[account_id] < int(withdraw_value):
+        if bank[account_id] < withdraw_value:
             return 'Insufficient funds', 400
         
-        bank[account_id] -= int(withdraw_value)
+        bank[account_id] -= withdraw_value
         return {"balance": bank[account_id]}, 200
 
     return 'Account not found', 404
 
-@app.route('/<str:account_id>', methods=['POST'])
+@app.route('/<account_id>', methods=['POST'])
 def create_account(account_id: str):
 
     if account_id in bank:
